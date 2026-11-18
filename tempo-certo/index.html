@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tempo Certo</title>
+  <meta name="description" content="Previsão do tempo para qualquer cidade, com dados do Open-Meteo.">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    /* Aplica o tema salvo antes da primeira pintura, evitando flash. */
+    try {
+      var t = JSON.parse(localStorage.getItem("tc:theme"));
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Ir para o conteúdo</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <h1 class="brand">Tempo Certo</h1>
+
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <label class="sr-only" for="q">Buscar cidade</label>
+        <input id="q" name="q" type="search" placeholder="Buscar cidade (ex.: Curitiba)"
+               role="combobox" aria-expanded="false" aria-controls="suggestions"
+               aria-autocomplete="list" spellcheck="false">
+        <ul id="suggestions" class="suggestions" role="listbox" aria-label="Sugestões de cidades" hidden></ul>
+      </form>
+
+      <div class="tools">
+        <button type="button" class="btn" id="btnLocate" title="Usar minha localização">Localização</button>
+        <button type="button" class="btn" id="btnUnits" aria-label="Alternar entre Celsius e Fahrenheit">°C</button>
+        <button type="button" class="btn" id="btnTheme" aria-label="Alternar tema claro e escuro">Tema</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+    <div id="app" class="app" hidden>
+      <section id="current" class="card hero" aria-label="Tempo agora"></section>
+      <section id="details" class="details" aria-label="Detalhes de hoje"></section>
+      <section id="hourly" class="card" aria-label="Próximas 24 horas"></section>
+      <section id="daily" class="card" aria-label="Previsão de 7 dias"></section>
+      <aside id="favorites" class="card" aria-label="Cidades favoritas"></aside>
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    Dados meteorológicos:
+    <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+    (licença CC BY 4.0). Busca de cidades pela API de geocodificação do Open-Meteo.
+  </footer>
+
+  <script src="lib.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
