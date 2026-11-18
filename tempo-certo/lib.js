@@ -1,8 +1,6 @@
-/* Funções puras do Tempo Certo: sem DOM, testáveis no Node. */
+
 (function (root) {
   "use strict";
-
-  // Códigos WMO usados pelo Open-Meteo -> [descrição, tipo de ícone]
   const WMO = {
     0: ["Céu limpo", "clear"],
     1: ["Predominantemente limpo", "clear"],
@@ -57,8 +55,6 @@
   function uvText(uv) {
     return isNum(uv) ? `${Math.round(uv)} (${uvLabel(uv)})` : "—";
   }
-
-  // A API devolve °C, km/h e mm; a conversão para imperial é feita aqui.
   function temp(c, units) {
     if (!isNum(c)) return "—";
     return String(Math.round(units === "imperial" ? (c * 9) / 5 + 32 : c));
@@ -81,13 +77,9 @@
   function pressure(hpa) {
     return isNum(hpa) ? `${Math.round(hpa)} hPa` : "—";
   }
-
-  // Horário local ISO "2026-11-18T08:15" -> "08:15"
   function hhmm(iso) {
     return typeof iso === "string" && iso.length >= 16 ? iso.slice(11, 16) : "—";
   }
-
-  // Próximas `count` horas a partir da hora cheia atual (horários já no fuso do local).
   function pickHourly(h, nowIso, count) {
     const n = count || 24;
     const start = nowIso.slice(0, 13) + ":00";

@@ -1,4 +1,4 @@
-/* Tempo Certo: interface e chamadas à API Open-Meteo (sem chave de acesso). */
+
 (function () {
   "use strict";
 
@@ -17,7 +17,7 @@
   const $ = (sel) => document.querySelector(sel);
   const state = { place: null, units: "metric", data: null, favs: [], updatedAt: null };
 
-  /* ---------- armazenamento local (tolerante a falhas) ---------- */
+  
   function load(key, fallback) {
     try {
       const raw = localStorage.getItem(key);
@@ -27,10 +27,10 @@
     }
   }
   function save(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* ignora */ }
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {  }
   }
 
-  /* ---------- ícones ---------- */
+  
   const svg = (inner) =>
     '<svg class="wx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + "</svg>";
@@ -59,7 +59,7 @@
     'stroke-linejoin="round" fill="' + (on ? "currentColor" : "none") + '">' +
     '<path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/></svg>';
 
-  /* ---------- status (carregando / erro) ---------- */
+  
   function setStatus(message, kind, withRetry) {
     const el = $("#status");
     if (!message) { el.hidden = true; el.textContent = ""; el.className = "status"; return; }
@@ -76,7 +76,7 @@
     return "Não foi possível obter a previsão agora. Tente novamente em instantes.";
   }
 
-  /* ---------- API ---------- */
+  
   async function fetchWeather(place, signal) {
     const params = new URLSearchParams({
       latitude: place.lat,
@@ -105,7 +105,7 @@
     return Array.isArray(json.results) ? json.results : [];
   }
 
-  /* ---------- carregamento principal ---------- */
+  
   let weatherCtrl = null;
   async function loadPlace(place, opts) {
     const o = opts || {};
@@ -123,12 +123,12 @@
       render();
     } catch (err) {
       if (err.name === "AbortError") return;
-      if (o.silent && state.data) return; // atualização automática falhou: mantém o que já está na tela
+      if (o.silent && state.data) return;
       setStatus(errorMessage(err), "error", true);
     }
   }
 
-  /* ---------- renderização ---------- */
+  
   const unitSymbol = () => (state.units === "metric" ? "°C" : "°F");
 
   function render() {
@@ -256,7 +256,7 @@
     $("#favorites").innerHTML = '<h3 class="card-title">Favoritas</h3>' + body;
   }
 
-  /* ---------- favoritos ---------- */
+  
   function toggleFav() {
     const idx = state.favs.findIndex((f) => sameplace(f, state.place));
     if (idx >= 0) {
@@ -270,7 +270,7 @@
     renderFavorites();
   }
 
-  /* ---------- busca com sugestões ---------- */
+  
   const input = $("#q");
   const list = $("#suggestions");
   let results = [];
@@ -365,7 +365,7 @@
   });
   document.addEventListener("click", (e) => { if (!e.target.closest(".search")) closeSuggestions(); });
 
-  /* ---------- localização, unidades, tema ---------- */
+  
   $("#btnLocate").addEventListener("click", () => {
     if (!navigator.geolocation) { setStatus("Este navegador não oferece geolocalização.", "error"); return; }
     setStatus("Obtendo sua localização…", "loading");
@@ -400,7 +400,7 @@
     save(STORE.theme, next);
   });
 
-  /* ---------- cliques delegados ---------- */
+  
   document.addEventListener("click", (e) => {
     const el = e.target.closest("[data-action]");
     if (!el) return;
@@ -416,7 +416,7 @@
     }
   });
 
-  /* ---------- inicialização ---------- */
+  
   function init() {
     const units = load(STORE.units, "metric");
     state.units = units === "imperial" ? "imperial" : "metric";

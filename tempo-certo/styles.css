@@ -1,4 +1,4 @@
-/* Layout: cabeçalho fixo com busca; hero + detalhes lado a lado; horas em faixa rolável; 7 dias e favoritas lado a lado. */
+
 :root {
   --bg: #edf1f4;
   --surface: #ffffff;
@@ -75,7 +75,6 @@ button { font: inherit; color: inherit; }
 
 .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; }
 
-/* Cabeçalho */
 .top {
   position: sticky; top: 0; z-index: 20;
   background: var(--bg); border-bottom: 1px solid var(--line);
@@ -109,14 +108,12 @@ button { font: inherit; color: inherit; }
 .suggestions li[aria-selected="true"], .suggestions li[role="option"]:hover { background: var(--surface-2); }
 .suggestions li.none { cursor: default; color: var(--ink-2); }
 
-/* Status */
 .status {
   margin: 16px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--surface);
   border: 1px solid var(--line); display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
 }
 .status.error { background: var(--err-bg); color: var(--err); border-color: var(--err); }
 
-/* Grade principal */
 .app { display: grid; gap: 16px; margin: 16px 0 24px; grid-template-columns: minmax(0, 1fr); }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; min-width: 0; }
 .card-title { margin: 0 0 12px; font: 600 0.8rem/1.2 var(--font-text); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
@@ -142,13 +139,11 @@ button { font: inherit; color: inherit; }
 .icon-btn[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
 .icon-btn.small { width: 32px; height: 32px; font-size: 1.2rem; line-height: 1; }
 
-/* Detalhes */
 .details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; align-content: start; }
 .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
 .stat dt { color: var(--ink-2); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .stat dd { margin: 4px 0 0; font: 600 1.15rem/1.25 var(--font-display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 
-/* Horas */
 .scroll { overflow-x: auto; margin-inline: -4px; padding: 4px; }
 .hours { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; width: max-content; }
 .hour {
@@ -162,7 +157,6 @@ button { font: inherit; color: inherit; }
 .h-temp { font-weight: 600; }
 .h-pop { font-size: 0.75rem; color: var(--cool); min-height: 1.1em; }
 
-/* Dias */
 .days { list-style: none; margin: 0; padding: 0; display: grid; }
 .day {
   display: grid; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line);
@@ -180,7 +174,6 @@ button { font: inherit; color: inherit; }
 .bar i { position: absolute; top: 0; bottom: 0; border-radius: 6px; background: linear-gradient(90deg, var(--cool), var(--accent)); }
 .legend { margin: 10px 0 0; color: var(--ink-2); font-size: 0.8rem; }
 
-/* Favoritas */
 .favs { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .favs li { display: flex; gap: 8px; align-items: stretch; }
 .fav-open {
@@ -194,7 +187,6 @@ button { font: inherit; color: inherit; }
 
 .foot { padding-block: 8px 28px; color: var(--ink-2); font-size: 0.82rem; }
 
-/* Telas largas */
 @media (min-width: 880px) {
   .app { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
   #hourly { grid-column: 1 / -1; }
@@ -202,7 +194,6 @@ button { font: inherit; color: inherit; }
   #favorites { grid-column: 2; align-self: start; }
 }
 
-/* Celular */
 @media (max-width: 640px) {
   .top-inner { grid-template-columns: minmax(0, 1fr); }
   .tools { flex-wrap: wrap; }
@@ -216,7 +207,6 @@ button { font: inherit; color: inherit; }
   .btn, .icon-btn, .fav-open { transition: border-color 0.15s, color 0.15s; }
 }
 
-/* Visual simples e neutro */
 :root {
   --bg: #f4f5f6;
   --surface: #ffffff;
